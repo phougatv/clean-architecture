@@ -4,6 +4,7 @@
     public enum ErrorCode
     {
         None,
+        RequestInvalid,
         ResourceInvalid,
         ResourceNotFound
     }
