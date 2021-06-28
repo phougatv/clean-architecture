@@ -18,7 +18,7 @@
             app.UseSwaggerUI(setup =>   // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             {
                 setup.SwaggerEndpoint("/swagger/v1/swagger.json", "ConsoleApp V1");
-                setup.RoutePrefix = "swagger";
+                setup.RoutePrefix = string.Empty;
             });
 
             return app;
