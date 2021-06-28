@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\components\components.user\Components.User.csproj" />
+    <ProjectReference Include="..\components\Components.Value\Components.Value.csproj" />
+  </ItemGroup>
+
+</Project>
