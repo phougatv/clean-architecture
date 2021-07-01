@@ -1,12 +1,14 @@
 ﻿namespace ConsoleApp
 {
-    using Components.Shared.Swagger;
+    using Components.Core.Swagger;
     using Components.User;
     using Components.Value;
-    using Microsoft.AspNetCore.Builder;
+    using ConsoleApp.Errors;
+    using ConsoleApp.User.Automapper;
     using Microsoft.Extensions.DependencyInjection;
 
-    internal static class ConsoleAppExtension
+    /// <summary> Adds services to the container </summary>
+    internal static partial class Extension
     {
         #region Add Services to ConfigureServices Method.
         internal static IServiceCollection AddServices(this IServiceCollection services)
@@ -23,7 +25,7 @@
             services.AddMvc();
             services.AddControllers(mvcOptions =>
             {
-                var inputFormattersCount = mvcOptions.InputFormatters.Count;
+                mvcOptions.Filters.Add(new ValidateModelActionFilter());
             });
 
             return services;
@@ -31,6 +33,7 @@
 
         private static IServiceCollection AddCrossCuttingComponents(this IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(UserViewModelProfile));
             services.AddSwaggerComponent();
 
             return services;
@@ -44,33 +47,5 @@
             return services;
         }
         #endregion Add Services to ConfigureServices Method.
-
-        #region Use Components here to configure the HTTP-Request Pipeline
-        internal static IApplicationBuilder UseServices(this IApplicationBuilder app)
-        {
-            app.UseCustomComponents();
-            app.UseDotNetCoreServices();
-
-            return app;
-        }
-
-        private static IApplicationBuilder UseDotNetCoreServices(this IApplicationBuilder app)
-        {
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            return app;
-        }
-
-        private static IApplicationBuilder UseCustomComponents(this IApplicationBuilder app)
-        {
-            app.UseSwaggerComponent();
-
-            return app;
-        }
-        #endregion
     }
 }

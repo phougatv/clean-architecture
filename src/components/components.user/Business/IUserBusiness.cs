@@ -6,11 +6,11 @@
 
     public interface IUserBusiness : IDisposable
     {
-        bool Create(UserModel model);
+        bool Create(UserDomainModel model);
         bool Delete(Guid id);
-        bool Delete(UserModel model);
-        UserModel Get(Guid id);
-        IEnumerable<UserModel> GetAll();
-        bool Update(UserModel model);
+        bool Delete(UserDomainModel model);
+        UserDomainModel Get(Guid id);
+        IEnumerable<UserDomainModel> GetAll();
+        bool Update(UserDomainModel model);
     }
 }

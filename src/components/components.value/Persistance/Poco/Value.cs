@@ -1,6 +1,6 @@
 ﻿namespace Components.User.Persistance.Poco
 {
-    using Components.Shared.DataAccess.Base.Poco;
+    using Components.Core.DataAccess.Base.Poco;
     using System;
 
     internal class Value : Entity

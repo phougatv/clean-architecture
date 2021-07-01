@@ -1,6 +1,6 @@
 ﻿namespace Components.User
 {
-    using Components.Shared.DataAccess.Base.Interfaces;
+    using Components.Core.DataAccess.Base.Interfaces;
     using Components.User.Automapper.Profiles;
     using Components.User.Business;
     using Components.User.Persistance;
@@ -26,9 +26,10 @@
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Components.User;Trusted_Connection=True;");
             });
 
-            services.AddAutoMapper(typeof(UserProfile));
-            services.AddScoped<IUnitOfWorkWithDbContext<UserDbContext, User>, UserUnitOfWork>();
-            services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
+            services.AddAutoMapper(typeof(UserDomainProfile));
+            services.AddScoped<UserUnitOfWork>();
+            services.AddScoped<IUnitOfWorkWithDbContext<UserDbContext, User>>(s => s.GetService<UserUnitOfWork>());
+            services.AddScoped<IUserUnitOfWork>(s => s.GetService<UserUnitOfWork>());
             services.AddScoped<IUserBusiness, UserBusiness>();
             services.AddScoped<IUserRepository, UserRepository>();
 

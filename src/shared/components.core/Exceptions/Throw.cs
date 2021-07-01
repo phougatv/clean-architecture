@@ -1,4 +1,4 @@
-﻿namespace Components.Shared.Exceptions
+﻿namespace Components.Core.Exceptions
 {
     using System;
 

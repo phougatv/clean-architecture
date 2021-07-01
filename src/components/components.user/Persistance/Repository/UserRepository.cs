@@ -1,9 +1,8 @@
 ﻿namespace Components.User.Persistance.Repository
 {
-    using Components.Shared.DataAccess.Base.Interfaces;
+    using Components.Core.DataAccess.Base.Interfaces;
+    using Components.Core.DataAccess.Extensions;
     using Components.User.Persistance.Poco;
-    using Microsoft.EntityFrameworkCore;
-    using Shared.DataAccess.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,20 +10,19 @@
     internal class UserRepository : IUserRepository
     {
         #region Private Fields
-        private readonly UserDbContext _dbContext;
-        private DbSet<User> _users;
-        private bool _disposed = false; // To detect redundant calls
+        // To detect redundant calls
+        private bool _disposed = false;
+        private readonly IUnitOfWorkWithDbContext<UserDbContext, User> _uow;
         #endregion Private Fields
 
         public UserRepository(IUnitOfWorkWithDbContext<UserDbContext, User> uow)
         {
-            _dbContext = uow.DbContext;
-            //_users = uow.DbContext.Users;
+            _uow = uow;
         }
 
         bool IRepository<User>.Create(User user)
         {
-            var userEntry = _dbContext.Set<User>().Add(user);
+            var userEntry = _uow.DbContext.Users.Add(user);
 
             return userEntry.IsAdded();
         }
@@ -36,11 +34,11 @@
         }
         bool IRepository<User>.Delete(User user) => InternalDelete(user);
         User IRepository<User>.Get(Guid id) => InternalGet(id);
-        IEnumerable<User> IRepository<User>.GetAll() => _dbContext.Set<User>();
+        IEnumerable<User> IRepository<User>.GetAll() => _uow.DbContext.Set<User>();
         bool IRepository<User>.Update(User user)
         {
-            _dbContext.Entry(user).SetStateToModified();
-            _dbContext.Set<User>().Attach(user);
+            _uow.DbContext.Entry(user).SetStateToModified();
+            _uow.DbContext.Set<User>().Attach(user);
 
             return true;
         }
@@ -51,10 +49,10 @@
             if (null == user)
                 return false;
 
-            var userEntity = _dbContext.Set<User>().Remove(user);
+            var userEntity = _uow.DbContext.Set<User>().Remove(user);
             return userEntity.IsDeleted();
         }
-        private User InternalGet(Guid id) => _dbContext.Set<User>().FirstOrDefault(user => user.Id == id);
+        private User InternalGet(Guid id) => _uow.DbContext.Set<User>().FirstOrDefault(user => user.Id == id);
         #endregion
 
         #region Dispose

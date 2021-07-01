@@ -24,7 +24,7 @@
             _uow = uow;
         }
 
-        bool IUserBusiness.Create(UserModel model)
+        bool IUserBusiness.Create(UserDomainModel model)
         {
             var poco = _mapper.Map<User>(model);
             var result = _uow.Repository.Create(poco);
@@ -37,32 +37,32 @@
             var commit = _uow.Commit();
             return result && commit > 0;
         }
-        bool IUserBusiness.Delete(UserModel model)
+        bool IUserBusiness.Delete(UserDomainModel model)
         {
             var poco = _mapper.Map<User>(model);
             var result = _uow.Repository.Delete(poco);
             var commit = _uow.Commit();
             return result && commit > 0;
         }
-        UserModel IUserBusiness.Get(Guid id)
+        UserDomainModel IUserBusiness.Get(Guid id)
         {
             var poco = _uow.Repository.Get(id);
             if (null == poco)
                 return null;
 
-            var model = _mapper.Map<UserModel>(poco);
+            var model = _mapper.Map<UserDomainModel>(poco);
             return model;
         }
-        IEnumerable<UserModel> IUserBusiness.GetAll()
+        IEnumerable<UserDomainModel> IUserBusiness.GetAll()
         {
             var pocos = _uow.Repository.GetAll().ToArray();
             if (null == pocos || !pocos.Any())
-                return Array.Empty<UserModel>();
+                return Array.Empty<UserDomainModel>();
 
-            var models = _mapper.Map<IEnumerable<UserModel>>(pocos);
+            var models = _mapper.Map<IEnumerable<UserDomainModel>>(pocos);
             return models;
         }
-        bool IUserBusiness.Update(UserModel model)
+        bool IUserBusiness.Update(UserDomainModel model)
         {
             var user = _mapper.Map<User>(model);
             if (null == user)

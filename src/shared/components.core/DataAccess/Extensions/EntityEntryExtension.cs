@@ -1,6 +1,6 @@
-﻿namespace Components.Shared.DataAccess.Extensions
+﻿namespace Components.Core.DataAccess.Extensions
 {
-    using Components.Shared.Exceptions;
+    using Components.Core.Exceptions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
 

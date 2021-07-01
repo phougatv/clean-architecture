@@ -1,9 +1,8 @@
-﻿namespace Components.User.Business.Models
+﻿namespace ConsoleApp.User
 {
     using System;
-    using Components.Shared.Domain.Base;
 
-    public class UserModel : EntityModel
+    public class UserViewModel
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

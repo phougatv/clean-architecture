@@ -1,6 +1,6 @@
-﻿namespace Components.Shared.DataAccess.Base.Interfaces
+﻿namespace Components.Core.DataAccess.Base.Interfaces
 {
-    using Components.Shared.DataAccess.Base.Poco;
+    using Components.Core.DataAccess.Base.Poco;
     using System.Threading.Tasks;
 
     public interface IAsyncUnitOfWork<TEntity>

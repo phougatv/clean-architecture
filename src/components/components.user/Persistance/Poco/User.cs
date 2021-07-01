@@ -1,14 +1,14 @@
 ﻿namespace Components.User.Persistance.Poco
 {
-    using Shared.DataAccess.Base.Poco;
+    using Components.Core.DataAccess.Base.Poco;
     using System;
 
     internal class User : Entity
     {
-        internal string FirstName { get; set; }
-        internal string MiddleName { get; set; }
-        internal string LastName { get; set; }
-        internal string EmailId { get; set; }
-        internal DateTime DateOfBirth { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string EmailId { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

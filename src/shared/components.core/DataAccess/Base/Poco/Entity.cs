@@ -1,9 +1,11 @@
-﻿namespace Components.Shared.Domain.Base
+﻿namespace Components.Core.DataAccess.Base.Poco
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
-    public class EntityModel
+    public class Entity
     {
+        [Key]
         public Guid Id { get; set; }
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }

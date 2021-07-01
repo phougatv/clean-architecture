@@ -1,4 +1,4 @@
-﻿namespace Components.Shared.Swagger
+﻿namespace Components.Core.Swagger
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
