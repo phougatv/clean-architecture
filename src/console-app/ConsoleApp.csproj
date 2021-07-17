@@ -9,4 +9,6 @@
     <ProjectReference Include="..\components\Components.Value\Components.Value.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
 </Project>

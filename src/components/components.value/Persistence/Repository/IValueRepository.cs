@@ -1,7 +1,7 @@
-﻿namespace Components.Value.Persistance.Repository
+﻿namespace Components.Value.Persistence.Repository
 {
     using Components.Core.DataAccess.Base.Interfaces;
-    using Components.User.Persistance.Poco;
+    using Components.Value.Persistence.Poco;
 
     internal interface IValueRepository : IRepository<Value>
     {

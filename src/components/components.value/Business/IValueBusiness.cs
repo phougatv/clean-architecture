@@ -5,6 +5,7 @@
 
     public interface IValueBusiness
     {
-        ValueModel Get(Guid id);
+        bool Create(ValueDomainModel model);
+        ValueDomainModel Get(Guid id);
     }
 }

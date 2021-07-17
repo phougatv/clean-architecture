@@ -1,8 +1,9 @@
 ﻿namespace Components.Value.Business
 {
     using AutoMapper;
-    using Components.Value.Persistance.Repository;
     using Components.Value.Business.Models;
+    using Components.Value.Persistence.Repository;
+    using Components.Value.Persistence.Poco;
     using System;
 
     internal class ValueBusiness : IValueBusiness
@@ -16,10 +17,18 @@
             _mapper = mapper;
         }
 
-        public ValueModel Get(Guid id)
+        public bool Create(ValueDomainModel model)
+        {
+            var poco = _mapper.Map<Value>(model);
+            var isCreated = _repository.Create(poco);
+
+            return isCreated;
+        }
+
+        public ValueDomainModel Get(Guid id)
         {
             var poco = _repository.Get(id);
-            var dto = _mapper.Map<ValueModel>(poco);
+            var dto = _mapper.Map<ValueDomainModel>(poco);
 
             return dto;
         }

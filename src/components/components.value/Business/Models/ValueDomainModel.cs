@@ -1,11 +1,9 @@
 ﻿namespace Components.Value.Business.Models
 {
     using Components.Core.Domain.Base;
-    using System;
 
-    public class ValueModel : EntityDomainModel
+    public class ValueDomainModel : EntityDomainModel
     {
         public string Name { get; set; }
-        public DateTime? DateTime { get; set; }
     }
 }

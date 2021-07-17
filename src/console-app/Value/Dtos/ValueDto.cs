@@ -5,8 +5,8 @@
 
     public class ValueDto : ComponentBaseResponse
     {
-        public ValueModel Value { get; set; }
-        public ValueDto(ValueModel value, bool isValid, string message)
+        public ValueDomainModel Value { get; set; }
+        public ValueDto(ValueDomainModel value, bool isValid)
             : base(isValid)
         {
             Value = value;

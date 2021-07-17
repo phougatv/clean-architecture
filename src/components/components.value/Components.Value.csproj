@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Persistance\UnitOfWork\" />
+    <Folder Include="Persistence\UnitOfWork\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\shared\components.core\Components.Core.csproj" />
+    <ProjectReference Include="..\..\shared\components.data-access.sql\Components.DataAccess.Sql.csproj" />
   </ItemGroup>
 
 </Project>
