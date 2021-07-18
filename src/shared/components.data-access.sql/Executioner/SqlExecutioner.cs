@@ -25,7 +25,7 @@
 
         private void InternalCommit(string connectionStringKey)
         {
-            var connectionString = _connectionStringAccessor.GetConnectionString(connectionStringKey);
+            var connectionString = _connectionStringAccessor.GetConnectionString(connectionStringKey);            
             _peristent.PersistMultipleCommandsInSingleTransaction(connectionString, _orderOfExecutions);
         }
         private void InternalExecute(SqlCommandDetail detail) => _orderOfExecutions.Enqueue(detail);

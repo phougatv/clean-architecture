@@ -16,6 +16,7 @@
             Queue<SqlCommandDetail> orderOfExecutions)
         {
             using var connection = new SqlConnection(connectionString);
+            connection.Open();
             using var transaction = connection.BeginTransaction();  //TODO: provide transaction and log it. So one can get a better handle on why the transaction failed and why?
             try
             {

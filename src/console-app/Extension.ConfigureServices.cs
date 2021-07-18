@@ -1,20 +1,22 @@
 ﻿namespace ConsoleApp
 {
     using Components.Core.Swagger;
+    using Components.DataAccess.Sql;
     using Components.User;
     using Components.Value;
     using ConsoleApp.Errors;
     using ConsoleApp.User.Automapper;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary> Adds services to the container </summary>
     internal static partial class Extension
     {
         #region Add Services to ConfigureServices Method.
-        internal static IServiceCollection AddServices(this IServiceCollection services)
+        internal static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDotNetCoreServices();
-            services.AddCrossCuttingComponents();
+            services.AddCrossCuttingComponents(configuration);
             services.AddBusinessComponents();
 
             return services;
@@ -31,10 +33,11 @@
             return services;
         }
 
-        private static IServiceCollection AddCrossCuttingComponents(this IServiceCollection services)
+        private static IServiceCollection AddCrossCuttingComponents(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(typeof(UserViewModelProfile));
             services.AddSwaggerComponent();
+            services.AddDataAccessSql(configuration);
 
             return services;
         }

@@ -5,5 +5,9 @@
     class SqlConfiguration
     {
         internal IDictionary<string, string> ConnectionStrings { get; set; }
+        public SqlConfiguration()
+        {
+
+        }
     }
 }

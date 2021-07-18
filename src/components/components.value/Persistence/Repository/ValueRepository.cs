@@ -4,6 +4,7 @@
     using Components.DataAccess.Sql;
     using Components.DataAccess.Sql.Enums;
     using Components.DataAccess.Sql.Executioner;
+    using Components.DataAccess.Sql.Extensions;
     using Components.Value.Persistence.Base;
     using Components.Value.Persistence.Poco;
     using System;
@@ -22,24 +23,16 @@
             _sqlExecutioner = sqlExecutioner;
         }
 
-        //bool IRepository<Value>.Create(Value entity) => _dbContext.Create(entity);
         bool IRepository<Value>.Create(Value entity)
         {
             var commandDetail = new SqlCommandDetail
             {
                 Command = Command.Create,
-                CommandText = "",
-                CommandType = CommandType.StoredProcedure,
-                PerformParamBinding = p =>
-                {
-                    p.AddWithValue("@Id", entity.Id);
-                    p.AddWithValue("@Name", entity.Name);
-                    p.AddWithValue("@CreatedBy", entity.CreatedBy);
-                    p.AddWithValue("@UpdatedBy", entity.UpdatedBy);
-                    p.AddWithValue("@CreatedOn", entity.CreatedOn);
-                    p.AddWithValue("@UpdatedOn", entity.UpdatedOn);
-                }
+                CommandText = "CreateValue",
+                CommandType = CommandType.StoredProcedure
             };
+            commandDetail.PerformParamBinding = entity.GetSqlParameterCollection(commandDetail.PerformParamBinding);
+
             _sqlExecutioner.Execute(commandDetail);
 
             return true;

@@ -14,4 +14,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\components.data-access.sql\Components.DataAccess.Sql.csproj" />
+  </ItemGroup>
+
 </Project>
